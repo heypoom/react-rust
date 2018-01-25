@@ -13,7 +13,7 @@ const enhance = lifecycle({
     const result = lib.hello()
 
     console.log('->', result)
-    console.log('Hello?', window.localStorage.getItem(lib.MY_KEY))
+    console.log('Knock, Knock?', window.localStorage.getItem(lib.SECRET_KEY))
   },
 })
 

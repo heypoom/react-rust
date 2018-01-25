@@ -3,42 +3,42 @@ extern crate stdweb;
 
 use stdweb::web::*;
 
-pub static SECRET_KEY: &str = "IS_RUST_GREAT";
+pub static SECRET_KEY: &str = "SUPER_DUPER_SECRET_KEY";
 
 fn fetch(url: &str) -> stdweb::Value {
-    let promise = js! {
-        return fetch(@{url})
-    };
+  let promise = js! {
+    return fetch(@{url})
+  };
 
-    promise
+  promise
 }
 
 fn hello() -> String {
-    js! {
-        console.log("Rust is Ready!");
-    }
+  js! {
+    console.log("Rust is Ready!");
+  }
 
-    let result = fetch("https://jsonplaceholder.typicode.com");
+  let result = fetch("https://jsonplaceholder.typicode.com");
 
-    js! {
-        @{result}.then(console.log)
-    }
+  js! {
+    @{result}.then(console.log)
+  }
 
-    let window = window();
-    let storage = window.local_storage();
+  let window = window();
+  let storage = window.local_storage();
 
-    storage.insert(SECRET_KEY, "Yep!");
+  storage.insert(SECRET_KEY, "Who's There?");
 
-    String::from("Hi!")
+  String::from("Hi!")
 }
 
 fn main() {
-    stdweb::initialize();
+  stdweb::initialize();
 
-    js! {
-        Module.exports.hello = @{hello};
-        Module.exports.SECRET_KEY = @{SECRET_KEY};
-    }
+  js! {
+    Module.exports.hello = @{hello};
+    Module.exports.SECRET_KEY = @{SECRET_KEY};
+  }
 
-    stdweb::event_loop()
+  stdweb::event_loop()
 }
