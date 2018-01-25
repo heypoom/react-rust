@@ -3,7 +3,6 @@ import createSagaMiddleware from 'redux-saga'
 import {persistStore} from 'redux-persist'
 
 import {reducers, rootSaga} from './root'
-import {fetchEventsSaga} from './app'
 
 /* eslint no-undef: 0 */
 
@@ -31,7 +30,6 @@ export default () => {
   }
 
   saga.run(rootSaga)
-  saga.run(fetchEventsSaga)
 
   return store
 }

@@ -1,31 +1,22 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {extractCritical} from 'emotion-server'
 
-class Document extends Component {
-  render() {
-    const {Html, Head, Body, children, renderMeta} = this.props
-
-    return (
-      <Html>
-        <Head>
-          <meta charSet="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <style dangerouslySetInnerHTML={{__html: renderMeta.css}} />
-          <title>Tech Events Browser</title>
-          <meta
-            name="description"
-            content="Discover the Tech Events in Thailand"
-          />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400"
-            rel="stylesheet"
-          />
-        </Head>
-        <Body>{children}</Body>
-      </Html>
-    )
-  }
-}
+const Document = ({Html, Head, Body, children, renderMeta}) => (
+  <Html>
+    <Head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <style dangerouslySetInnerHTML={{__html: renderMeta.css}} />
+      <title>React 💕 Rust</title>
+      <meta name="description" content="Discover the Tech Events in Thailand" />
+      <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400"
+        rel="stylesheet"
+      />
+    </Head>
+    <Body>{children}</Body>
+  </Html>
+)
 
 function webpack(config, args) {
   config.module.rules.push({
@@ -74,4 +65,3 @@ export default {
   },
   Document,
 }
-
