@@ -25,6 +25,7 @@ const enhance = lifecycle({
         margin: 0;
         font-family: -apple-system, BlinkMacSystemFont, sans-serif;
         color: #555;
+        background: rgb(251, 252, 255);
       }
 
       h1, h2 {

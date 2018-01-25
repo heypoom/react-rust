@@ -20,7 +20,8 @@ export default () => {
     composeEnhancers(applyMiddleware(...middleware)),
   )
 
-  persistStore(store)
+  // NOTE: Uncomment this to persist to Redux Store
+  // persistStore(store)
 
   if (module.hot) {
     module.hot.accept(() => {

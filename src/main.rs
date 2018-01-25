@@ -9,9 +9,9 @@ fn secret() -> String {
   let window = window();
   let storage = window.local_storage();
 
-  storage.insert(SECRET_KEY, "Who's There?");
+  storage.insert(SECRET_KEY, "I'm a Hog.");
 
-  String::from("JSConf Asia!")
+  String::from("Hot Bog!")
 }
 
 fn main() {
