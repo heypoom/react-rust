@@ -1,0 +1,44 @@
+{
+  "name": "react-static-example-basic",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-static start",
+    "build": "react-static build",
+    "serve": "serve dist -p 3000"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "emotion": "^8.0.12",
+    "polished": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.0.0",
+    "react-emotion": "^8.0.12",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.2.0",
+    "react-static": "^4.9.0-beta.5",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "emotion-server": "^8.0.12",
+    "eslint": "^4.16.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react-tools": "1.x.x",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.5.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "prettier": "^1.10.2",
+    "rust-native-wasm-loader": "^0.2.7",
+    "serve": "^6.1.0"
+  }
+}
