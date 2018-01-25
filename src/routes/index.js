@@ -1,20 +1,30 @@
-import React from 'react'
-import {lifecycle} from 'recompose'
+import React, {Component} from 'react'
+import styled from 'react-emotion'
 
 import wasm from '../main.rs'
 
-const Landing = () => <div>Hello</div>
+const Container = styled.div`
+  padding: 2em 4em;
+`
 
-const enhance = lifecycle({
+class Landing extends Component {
+  state = {secretKey: '', secretMessage: ''}
+
   async componentWillMount() {
     const lib = await wasm
-    console.log('WebAssembly Module:', lib)
 
-    const result = lib.hello()
+    const secretKey = localStorage.getItem(lib.SECRET_KEY)
 
-    console.log('->', result)
-    console.log('Knock, Knock?', window.localStorage.getItem(lib.SECRET_KEY))
-  },
-})
+    let secretMessage = lib.secret()
+    this.setState({secretKey, secretMessage})
+  }
 
-export default enhance(Landing)
+  render = () => (
+    <Container>
+      <h1>Knock, Knock. {this.state.secretKey}</h1>
+      <h2>{this.state.secretMessage}</h2>
+    </Container>
+  )
+}
+
+export default Landing

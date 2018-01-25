@@ -5,38 +5,24 @@ use stdweb::web::*;
 
 pub static SECRET_KEY: &str = "SUPER_DUPER_SECRET_KEY";
 
-fn fetch(url: &str) -> stdweb::Value {
-  let promise = js! {
-    return fetch(@{url})
-  };
-
-  promise
-}
-
-fn hello() -> String {
-  js! {
-    console.log("Rust is Ready!");
-  }
-
-  let result = fetch("https://jsonplaceholder.typicode.com");
-
-  js! {
-    @{result}.then(console.log)
-  }
-
+fn secret() -> String {
   let window = window();
   let storage = window.local_storage();
 
   storage.insert(SECRET_KEY, "Who's There?");
 
-  String::from("Hi!")
+  String::from("JSConf Asia!")
 }
 
 fn main() {
   stdweb::initialize();
 
   js! {
-    Module.exports.hello = @{hello};
+    console.log("Hello from Rust!");
+
+    fetch("https://jsonplaceholder.typicode.com").then(console.log);
+
+    Module.exports.secret = @{secret};
     Module.exports.SECRET_KEY = @{SECRET_KEY};
   }
 
