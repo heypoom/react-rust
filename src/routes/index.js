@@ -8,6 +8,8 @@ const Landing = () => <div>Hello</div>
 const enhance = lifecycle({
   async componentWillMount() {
     const lib = await wasm
+    console.log('WebAssembly Module:', lib)
+
     const result = lib.hello()
 
     console.log('->', result)
