@@ -17,6 +17,8 @@ const Document = ({Html, Head, Body, children, renderMeta}) => (
     <Body>{children}</Body>
   </Html>
 )
+
+// This uses `rust-native-wasm-loader` to load Rust code!
 const wasmLoader = {
   test: /\.rs$/,
   use: [
@@ -37,25 +39,18 @@ const wasmLoader = {
     },
   ],
 }
+
+const nodeConfig = {
+  dgram: 'empty',
+  fs: 'empty',
+  net: 'empty',
+  tls: 'empty',
+  child_process: 'empty',
+}
+
 function webpack(config, args) {
-  const rules = config.module.rules[0]
-  rules.oneOf.unshift(wasmLoader)
-
-  config.node = {
-    dgram: 'empty',
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty',
-    child_process: 'empty',
-  }
-
-  // rules.oneOf = [
-  //   ...rules.oneOf.slice(0, rules.oneOf.length - 1),
-  //   wasmLoader,
-  //   ...rules.oneOf.slice(rules.oneOf.length - 1, rules.oneOf.length),
-  // ]
-
-  config.module.rules[0].oneOf.forEach(module => console.log(module))
+  config.module.rules[0].oneOf.unshift(wasmLoader)
+  config.node = nodeConfig
 
   return config
 }
