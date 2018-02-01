@@ -2,6 +2,8 @@ import React from 'react'
 import styled, {css} from 'react-emotion'
 import {connect} from 'react-redux'
 
+import Snake from '../components/Snake'
+
 import {getSecret} from '../ducks/app'
 
 const Container = styled.div`
@@ -42,12 +44,27 @@ const Button = styled.button`
   }
 `
 
+const Number = styled.div`
+  color: #555;
+  margin-top: 1em;
+
+  ${props => console.log(props)};
+`
+
+const Page = styled.main`
+  display: flex;
+  flex-direction: column;
+`
+
 const Landing = ({secret, getSecret}) => (
-  <Container>
-    <Header>Knock, Knock. {secret.phrase}</Header>
-    <Header big>{secret.name}</Header>
-    <Button onClick={getSecret}>Reply</Button>
-  </Container>
+  <Page>
+    <Container>
+      <Header>Knock, Knock. {secret.phrase}</Header>
+      <Header big>{secret.name}</Header>
+      <Button onClick={getSecret}>Reply</Button>
+    </Container>
+    <Snake />
+  </Page>
 )
 
 const mapStateToProps = state => ({

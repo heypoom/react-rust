@@ -1,5 +1,6 @@
 import React from 'react'
 import {extractCritical} from 'emotion-server'
+import fs from 'fs'
 
 const Document = ({Html, Head, Body, children, renderMeta}) => (
   <Html>
@@ -51,8 +52,21 @@ const nodeConfig = {
 function webpack(config, args) {
   config.module.rules[0].oneOf.unshift(wasmLoader)
   config.node = nodeConfig
-
   return config
+}
+
+async function getRoutes() {
+  const routes = fs.readdirSync('src/routes')
+  return routes.map(route => {
+    const name = route.substr(0, route.length - 2)
+    if (name === 'index') {
+      return {path: '/', component: 'src/routes/index'}
+    } else if (name === '404') {
+      return {is404: true, component: 'src/routes/404'}
+    }
+
+    return {path: '/' + name, component: 'src/routes/' + name}
+  })
 }
 
 export default {
@@ -60,16 +74,7 @@ export default {
   getSiteProps: () => ({
     title: 'WebAssembly with Rust',
   }),
-  getRoutes: async () => [
-    {
-      path: '/',
-      component: 'src/routes/index',
-    },
-    {
-      is404: true,
-      component: 'src/routes/404',
-    },
-  ],
+  getRoutes,
   renderToHtml: (render, Comp, meta) => {
     const html = render(<Comp />)
     meta.css = extractCritical(html).css
