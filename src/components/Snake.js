@@ -1,94 +1,7 @@
 import React, {Component} from 'react'
 import styled from 'react-emotion'
 
-window.px = window.py = 10
-window.gs = window.tc = 20
-window.ax = window.ay = 15
-window.xv = window.yv = 0
-
-window.trail = []
-window.tail = 5
-
 const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
-
-function update() {
-  requestAnimationFrame(async () => {
-    await delay(29.97)
-
-    px += xv
-    py += yv
-
-    if (px < 0) {
-      px = tc - 1
-    }
-
-    if (px > tc - 1) {
-      px = 0
-    }
-
-    if (py < 0) {
-      py = tc - 1
-    }
-
-    if (py > tc - 1) {
-      py = 0
-    }
-
-    ctx.fillStyle = 'white'
-    ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    ctx.fillStyle = 'orange'
-
-    // Draw the snake's trail
-    trail.forEach(block => {
-      ctx.fillRect(block.x * gs, block.y * gs, gs - 2, gs - 2)
-
-      if (block.x == px && block.y == py) {
-        tail = 5
-      }
-    })
-
-    trail.push({x: px, y: py})
-
-    while (trail.length > tail) {
-      trail.shift()
-    }
-
-    if (ax == px && ay == py) {
-      tail++
-      ax = Math.floor(Math.random() * tc)
-      ay = Math.floor(Math.random() * tc)
-    }
-
-    ctx.fillStyle = 'palevioletred'
-    ctx.fillRect(ax * gs, ay * gs, gs - 2, gs - 2)
-
-    update()
-  })
-}
-
-function handleInput(e) {
-  console.log(e.key)
-
-  switch (e.key) {
-    case 'ArrowLeft':
-      xv = -1
-      yv = 0
-      break
-    case 'ArrowUp':
-      xv = 0
-      yv = -1
-      break
-    case 'ArrowRight':
-      xv = 1
-      yv = 0
-      break
-    case 'ArrowDown':
-      xv = 0
-      yv = 1
-      break
-  }
-}
 
 const Canvas = styled.canvas`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 25px;
@@ -96,15 +9,118 @@ const Canvas = styled.canvas`
 `
 
 export default class Snake extends Component {
+  px = 10
+  py = 10
+
+  gs = 20
+  tc = 20
+
+  ax = 15
+  ay = 15
+
+  xv = 0
+  yv = 0
+
+  trail = []
+  tail = 5
+
   componentDidMount() {
-    console.log(this.c)
+    document.addEventListener('keydown', this.handleInput)
+    this.update()
+  }
 
-    window.canvas = this.c
-    window.ctx = this.c.getContext('2d')
+  update = () => {
+    const canvas = this.c
+    const ctx = this.c.getContext('2d')
 
-    document.addEventListener('keydown', handleInput)
+    requestAnimationFrame(async () => {
+      await delay(29.97)
 
-    update()
+      this.px += this.xv
+      this.py += this.yv
+
+      if (this.px < 0) {
+        this.px = this.tc - 1
+      }
+
+      if (this.px > this.tc - 1) {
+        this.px = 0
+      }
+
+      if (this.py < 0) {
+        this.py = this.tc - 1
+      }
+
+      if (this.py > this.tc - 1) {
+        this.py = 0
+      }
+
+      ctx.fillStyle = 'white'
+      ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+      ctx.fillStyle = 'orange'
+
+      // Draw the snake's trail
+      this.trail.forEach(block => {
+        ctx.fillRect(
+          block.x * this.gs,
+          block.y * this.gs,
+          this.gs - 2,
+          this.gs - 2,
+        )
+
+        if (block.x === this.px && block.y === this.py) {
+          this.tail = 5
+        }
+      })
+
+      this.trail.push({x: this.px, y: this.py})
+
+      while (this.trail.length > this.tail) {
+        this.trail.shift()
+      }
+
+      if (this.ax === this.px && this.ay === this.py) {
+        this.tail++
+        this.ax = Math.floor(Math.random() * this.tc)
+        this.ay = Math.floor(Math.random() * this.tc)
+      }
+
+      ctx.fillStyle = 'palevioletred'
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.18)'
+      ctx.shadowBlur = 4
+      ctx.shadowOffsetX = 1
+      ctx.shadowOffsetY = 1
+      ctx.fillRect(
+        this.ax * this.gs,
+        this.ay * this.gs,
+        this.gs - 2,
+        this.gs - 2,
+      )
+
+      this.update()
+    })
+  }
+
+  handleInput = e => {
+    switch (e.key) {
+      case 'ArrowLeft':
+        this.xv = -1
+        this.yv = 0
+        break
+      case 'ArrowUp':
+        this.xv = 0
+        this.yv = -1
+        break
+      case 'ArrowRight':
+        this.xv = 1
+        this.yv = 0
+        break
+      case 'ArrowDown':
+        this.xv = 0
+        this.yv = 1
+        break
+    }
   }
 
   render = () => (
