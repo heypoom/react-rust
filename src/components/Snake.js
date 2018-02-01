@@ -34,7 +34,7 @@ export default class Snake extends Component {
     const ctx = this.c.getContext('2d')
 
     requestAnimationFrame(async () => {
-      await delay(29.97)
+      await delay(32)
 
       this.px += this.xv
       this.py += this.yv
@@ -58,7 +58,8 @@ export default class Snake extends Component {
       ctx.fillStyle = 'white'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      ctx.fillStyle = 'orange'
+      ctx.fillStyle = 'darkorange'
+      ctx.filter = `drop-shadow(${ctx.fillStyle} 0px 0px 12px)`
 
       // Draw the snake's trail
       this.trail.forEach(block => {
@@ -86,11 +87,12 @@ export default class Snake extends Component {
         this.ay = Math.floor(Math.random() * this.tc)
       }
 
-      ctx.fillStyle = 'palevioletred'
+      ctx.fillStyle = 'red'
       ctx.shadowColor = 'rgba(0, 0, 0, 0.18)'
       ctx.shadowBlur = 4
       ctx.shadowOffsetX = 1
       ctx.shadowOffsetY = 1
+      ctx.filter = `drop-shadow(${ctx.fillStyle} 0px 0px 12px)`
       ctx.fillRect(
         this.ax * this.gs,
         this.ay * this.gs,
