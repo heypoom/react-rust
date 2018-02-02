@@ -2,6 +2,7 @@ import React from 'react'
 import styled, {css} from 'react-emotion'
 import {connect} from 'react-redux'
 
+import Todo from '../components/Todo'
 import Snake from '../components/Snake'
 
 import {getSecret} from '../ducks/app'
@@ -63,6 +64,7 @@ const Landing = ({secret, getSecret}) => (
       <Header big>{secret.name}</Header>
       <Button onClick={getSecret}>Reply</Button>
     </Container>
+    <Todo />
     <Snake />
   </Page>
 )
