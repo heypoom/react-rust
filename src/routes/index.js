@@ -1,10 +1,7 @@
 import React from 'react'
 import styled, {css} from 'react-emotion'
-import {connect} from 'react-redux'
 
-import Snake from '../components/Snake'
-
-import {getSecret} from '../ducks/app'
+import Camera from '../components/Camera'
 
 const Container = styled.div`
   padding: 2em;
@@ -44,33 +41,17 @@ const Button = styled.button`
   }
 `
 
-const Number = styled.div`
-  color: #555;
-  margin-top: 1em;
-
-  ${props => console.log(props)};
-`
-
 const Page = styled.main`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
-const Landing = ({secret, getSecret}) => (
+const Landing = () => (
   <Page>
-    <Container>
-      <Header>Knock, Knock. {secret.phrase}</Header>
-      <Header big>{secret.name}</Header>
-      <Button onClick={getSecret}>Reply</Button>
-    </Container>
-    <Snake />
+    <Camera />
   </Page>
 )
 
-const mapStateToProps = state => ({
-  secret: state.app.secret,
-})
-
-const enhance = connect(mapStateToProps, {getSecret})
-
-export default enhance(Landing)
+export default Landing

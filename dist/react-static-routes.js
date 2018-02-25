@@ -10,8 +10,8 @@
       error: () => null,
     }
 
-    const t_0 = universal(import('../src/routes/404'), universalOptions)
-const t_1 = universal(import('../src/routes/index'), universalOptions)
+    const t_0 = universal(import('../src/routes/404.'), universalOptions)
+const t_1 = universal(import('../src/routes/index.'), universalOptions)
 
     // Template Map
     const templateMap = {
@@ -20,7 +20,7 @@ t_1
     }
 
     // Template Tree
-    const templateTree = {c:{"404":{t:"t_0"},"/":{t:"t_1"}}}
+    const templateTree = {c:{"404.":{t:"t_0"},"index.":{t:"t_1"}}}
 
     // Get template for given path
     const getComponentForPath = path => {
