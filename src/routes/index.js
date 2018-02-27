@@ -4,7 +4,7 @@ import styled, {css} from 'react-emotion'
 import Camera from '../components/Camera'
 
 const Container = styled.div`
-  padding: 2em;
+  padding: 0.4em;
   margin: 2em;
 
   text-align: center;
@@ -46,11 +46,15 @@ const Page = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  min-height: 100vh;
 `
 
 const Landing = () => (
   <Page>
-    <Camera />
+    <Container>
+      <Camera />
+    </Container>
   </Page>
 )
 

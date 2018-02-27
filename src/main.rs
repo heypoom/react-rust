@@ -61,7 +61,7 @@ fn fill(address: u32, max_width: u32, max_height: u32, time: f64) {
       0 => {
         // Create a red ripple effect from the top left corner
         let len = ((height * height + width * width) as f64).sqrt();
-        let nb = time + len / 4.0;
+        let nb = time + len / 1.5;
 
         let a = 128.0 + nb.cos() * 128.0;
         sl[i] = a as u8;
@@ -72,7 +72,7 @@ fn fill(address: u32, max_width: u32, max_height: u32, time: f64) {
         // Create a green ripple effect from the top right corner
         let width = 500 - width;
         let len = ((height * height + width * width) as f64).sqrt();
-        let nb = time + len / 4.0;
+        let nb = time + len / 1.5;
 
         let a = 128.0 + nb.cos() * 128.0;
         sl[i] = a as u8;
@@ -81,7 +81,7 @@ fn fill(address: u32, max_width: u32, max_height: u32, time: f64) {
       // Alpha Channel
       3 => {
         // Set the opacity to 1
-        sl[i] = 255;
+        sl[i] = 255
       },
 
       _ => {}
